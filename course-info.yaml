@@ -1,0 +1,8 @@
+type: marketplace
+title: Learning project tracker (create cource)
+language: English
+summary: Learning project tracker
+programming_language: Python
+environment: unittest
+content:
+- Learning Progress Tracker
