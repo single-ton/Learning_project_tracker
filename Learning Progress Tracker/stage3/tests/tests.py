@@ -86,7 +86,7 @@ class LearningProgressTrackerTest(StageTest):
         ["na'-me surname email@email.xyz", "Incorrect first name."],
         ["na--me surname email@email.xyz", "Incorrect first name."],
         ["na''me surname email@email.xyz", "Incorrect first name."],
-        #["námé surname email@email.xyz", "Incorrect first name."],
+        ["námé surname email@email.xyz", "Incorrect first name."],
         ["name s email@email.xyz", "Incorrect last name."],
         ["name -surname email@email.xyz", "Incorrect last name."],
         ["name 'surname email@email.xyz", "Incorrect last name."],
@@ -96,7 +96,7 @@ class LearningProgressTrackerTest(StageTest):
         ["name su-'rname email@email.xyz", "Incorrect last name."],
         ["name surname- email@email.xyz", "Incorrect last name."],
         ["name surname' email@email.xyz", "Incorrect last name."],
-        #["name surnámé email@email.xyz", "Incorrect last name."],
+        ["name surnámé email@email.xyz", "Incorrect last name."],
         ["name surname emailemail.xyz", "Incorrect email."],
         ["name surname email@emailxyz", "Incorrect email."],
         ["name surname email@e@mail.xyz", "Incorrect email."]
@@ -433,7 +433,7 @@ class LearningProgressTrackerTest(StageTest):
 
         for i in range(len(ids)):
             output = main.execute(ids[i])
-            expected = "{} points: Java={}; DSA={}; Databases={}; Spring={}".format(ids[i], i * 2, i * 2, i * 2, i * 2)
+            expected = "{} points: Python={}; DSA={}; Databases={}; Flask={}".format(ids[i], i * 2, i * 2, i * 2, i * 2)
             if incorrect_string(output, expected):
                 return CheckResult.wrong("Expected output: " + expected +
                                          ", but your output was: " + output)

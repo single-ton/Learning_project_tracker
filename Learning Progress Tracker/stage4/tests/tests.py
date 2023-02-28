@@ -183,7 +183,7 @@ class LearningProgressTrackerTest(StageTest):
         ["na'-me surname email@email.xyz", "Incorrect first name."],
         ["na--me surname email@email.xyz", "Incorrect first name."],
         ["na''me surname email@email.xyz", "Incorrect first name."],
-        #["námé surname email@email.xyz", "Incorrect first name."],
+        ["námé surname email@email.xyz", "Incorrect first name."],
         ["name s email@email.xyz", "Incorrect last name."],
         ["name -surname email@email.xyz", "Incorrect last name."],
         ["name 'surname email@email.xyz", "Incorrect last name."],
@@ -193,7 +193,7 @@ class LearningProgressTrackerTest(StageTest):
         ["name su-'rname email@email.xyz", "Incorrect last name."],
         ["name surname- email@email.xyz", "Incorrect last name."],
         ["name surname' email@email.xyz", "Incorrect last name."],
-        #["name surnámé email@email.xyz", "Incorrect last name."],
+        ["name surnámé email@email.xyz", "Incorrect last name."],
         ["name surname emailemail.xyz", "Incorrect email."],
         ["name surname email@emailxyz", "Incorrect email."],
         ["name surname email@e@mail.xyz", "Incorrect email."]
@@ -530,7 +530,7 @@ class LearningProgressTrackerTest(StageTest):
 
         for i in range(len(ids)):
             output = main.execute(ids[i])
-            expected = "{} points: Java={}; DSA={}; Databases={}; Spring={}".format(ids[i], i * 2, i * 2, i * 2, i * 2)
+            expected = "{} points: Python={}; DSA={}; Databases={}; Flask={}".format(ids[i], i * 2, i * 2, i * 2, i * 2)
             if incorrect_string(output, expected):
                 return CheckResult.wrong("Expected output: " + expected +
                                          ", but your output was: " + output)
@@ -595,7 +595,7 @@ class LearningProgressTrackerTest(StageTest):
         main.start()
         main.execute("statistics")
 
-        courses = ["Java", "DSA", "Databases", "Spring"]
+        courses = ["Python", "DSA", "Databases", "Flask"]
         for course in courses:
             output = main.execute(course)
             lines = output.split("\n")
@@ -669,27 +669,27 @@ class LearningProgressTrackerTest(StageTest):
                                      "and six lines with the following information: "
                                      "Most popular, Least popular, Highest activity, Lowest activity, Easiest course, "
                                      "Hardest course, but your output was: " + output_string)
-        if any_missing_keywords(lines[1], "java", "dsa", "databases", "spring"):
-            return CheckResult.wrong("Expected most popular: Java, DSA, Databases, Spring, "
+        if any_missing_keywords(lines[1], "python", "dsa", "databases", "flask"):
+            return CheckResult.wrong("Expected most popular: Python, DSA, Databases, Flask, "
                                      "but your output was: " + lines[1])
         if "n/a" not in lines[2].lower():
             return CheckResult.wrong("Expected least popular: n/a, "
                                      "but your output was: " + lines[2])
 
-        if any_missing_keywords(lines[3], "java", "dsa", "databases", "spring"):
-            return CheckResult.wrong("Expected top activity: Java, DSA, Databases, Spring, " +
+        if any_missing_keywords(lines[3], "python", "dsa", "databases", "flask"):
+            return CheckResult.wrong("Expected top activity: Python, DSA, Databases, Flask, " +
                                      "but your output was: " + lines[3])
 
         if "n/a" not in lines[4].lower():
             return CheckResult.wrong("Expected lowest activity: n/a, "
                                      "but your output was: " + lines[4])
 
-        if any_missing_keywords(lines[5], "java"):
-            return CheckResult.wrong("Expected easiest course: Java, " +
+        if any_missing_keywords(lines[5], "python"):
+            return CheckResult.wrong("Expected easiest course: Python, " +
                                      "but your output was: " + lines[5])
 
-        if any_missing_keywords(lines[6], "Spring"):
-            return CheckResult.wrong("Expected hardest course: Spring, "
+        if any_missing_keywords(lines[6], "flask"):
+            return CheckResult.wrong("Expected hardest course: Flask, "
                                      "but your output was: " + lines[6])
 
         return CheckResult.correct()
@@ -717,20 +717,20 @@ class LearningProgressTrackerTest(StageTest):
         main.execute("back")
         main.execute("statistics")
 
-        lines_java = main.execute("Java").splitlines()
+        lines_python = main.execute("Python").splitlines()
         lines_dsa = main.execute("DSA").splitlines()
         lines_db = main.execute("Databases").splitlines()
-        lines_spring = main.execute("Spring").splitlines()
+        lines_flask = main.execute("Flask").splitlines()
 
-        if check_lines_1(lines_java, ids):
-            return CheckResult.wrong("Your Java student list either contains incorrect data or is incorrectly sorted")
+        if check_lines_1(lines_python, ids):
+            return CheckResult.wrong("Your Python student list either contains incorrect data or is incorrectly sorted")
         if check_lines_2(lines_dsa, ids):
             return CheckResult.wrong("Your DSA student list either contains incorrect data or is incorrectly sorted")
         if check_lines_3(lines_db, ids):
             return CheckResult.wrong("Your Databases student list either contains incorrect data "
                                      "or is incorrectly sorted")
-        if check_lines_4(lines_spring, ids):
-            return CheckResult.wrong("Your Spring student list either contains incorrect data "
+        if check_lines_4(lines_flask, ids):
+            return CheckResult.wrong("Your Flask student list either contains incorrect data "
                                      "or is incorrectly sorted")
 
         return CheckResult.correct()
@@ -760,15 +760,15 @@ class LearningProgressTrackerTest(StageTest):
         main.execute("back")
         main.execute("statistics")
 
-        lines_java = main.execute("Java").splitlines()
+        lines_python = main.execute("Python").splitlines()
         lines_dsa = main.execute("DSA").splitlines()
         lines_db = main.execute("Databases").splitlines()
-        lines_spring = main.execute("Spring").splitlines()
+        lines_flask = main.execute("Flask").splitlines()
 
-        if(not re.match(".+\\s+24\\s+4\\.0\\s?%.*", lines_java[2]) or
-           not re.match(".+\\s+21\\s+3\\.5\\s?%.*", lines_java[3]) or
-           not lines_java[2].startswith(ids[1]) or not lines_java[3].startswith(ids[0])):
-            return CheckResult.wrong("Your Java student list either contains incorrect data or is incorrectly sorted")
+        if(not re.match(".+\\s+24\\s+4\\.0\\s?%.*", lines_python[2]) or
+           not re.match(".+\\s+21\\s+3\\.5\\s?%.*", lines_python[3]) or
+           not lines_python[2].startswith(ids[1]) or not lines_python[3].startswith(ids[0])):
+            return CheckResult.wrong("Your Python student list either contains incorrect data or is incorrectly sorted")
 
         if not re.match(".+\\s+18\\s+4\\.5\\s?%.*", lines_dsa[2]) or not lines_dsa[2].startswith(ids[0]):
             return CheckResult.wrong("Your DSA student list either contains incorrect data or is incorrectly sorted")
@@ -779,10 +779,10 @@ class LearningProgressTrackerTest(StageTest):
             return CheckResult.wrong("Your Databases student list either contains incorrect data "
                                      "or is incorrectly sorted")
 
-        if (not re.match(".+\\s+12\\s+2\\.2\\s?%.*", lines_spring[2]) or
-                not re.match(".+\\s+11\\s+2\\.0\\s?%.*", lines_spring[3]) or
-                not lines_spring[2].startswith(ids[0]) or not lines_spring[3].startswith(ids[1])):
-            return CheckResult.wrong("Your Spring student list either contains incorrect data "
+        if (not re.match(".+\\s+12\\s+2\\.2\\s?%.*", lines_flask[2]) or
+                not re.match(".+\\s+11\\s+2\\.0\\s?%.*", lines_flask[3]) or
+                not lines_flask[2].startswith(ids[0]) or not lines_flask[3].startswith(ids[1])):
+            return CheckResult.wrong("Your Flask student list either contains incorrect data "
                                      "or is incorrectly sorted")
 
         return CheckResult.correct()

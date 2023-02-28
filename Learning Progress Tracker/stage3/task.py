@@ -47,10 +47,10 @@ id_sequence_generator = 0
 
 
 class Course(Enum):
-    Java = "Java"
+    Python = "Python"
     DSA = "DSA"
     Databases = "Databases"
-    Spring = "Spring"
+    Flask = "Flask"
 
 
 class Student:
@@ -63,10 +63,10 @@ class Student:
 
     def __init__(self, first_name, last_name, email):
         self.courses = {
-            Course.Java: 0,
+            Course.Python: 0,
             Course.Databases: 0,
             Course.DSA: 0,
-            Course.Spring: 0,
+            Course.Flask: 0,
         }
         global id_sequence_generator
         self.id = str(id_sequence_generator)
@@ -77,10 +77,10 @@ class Student:
 
     def get_student_points(self):
         return response_students_points_template.format(self.id,
-                                                        Course.Java.name, self.courses[Course.Java],
+                                                        Course.Python.name, self.courses[Course.Python],
                                                         Course.DSA.name, self.courses[Course.DSA],
                                                         Course.Databases.name, self.courses[Course.Databases],
-                                                        Course.Spring.name, self.courses[Course.Spring])
+                                                        Course.Flask.name, self.courses[Course.Flask])
 
     def __eq__(self, other):
         if self == other:
@@ -89,14 +89,14 @@ class Student:
             return False
         return self.email == other.email
 
-    def __hash__(self):
-        return self.email.__hash__()
+    #def __hash__(self):
+    #    return self.email.__hash__()
 
     def update_points(self, points: list):
-        self.courses[Course.Java] = self.courses[Course.Java] + points[0]
+        self.courses[Course.Python] = self.courses[Course.Python] + points[0]
         self.courses[Course.DSA] = self.courses[Course.DSA] + points[1]
         self.courses[Course.Databases] = self.courses[Course.Databases] + points[2]
-        self.courses[Course.Spring] = self.courses[Course.Spring] + points[3]
+        self.courses[Course.Flask] = self.courses[Course.Flask] + points[3]
 
     def __str__(self):
         return self.id

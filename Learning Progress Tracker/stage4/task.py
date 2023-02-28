@@ -58,17 +58,17 @@ id_sequence_generator = 0
 
 
 class Course(Enum):
-    Java = "Java"
+    Python = "Python"
     DSA = "DSA"
     Databases = "Databases"
-    Spring = "Spring"
+    Flask = "Flask"
 
 
 completed_courses = {
-    Course.Java: 600,
+    Course.Python: 600,
     Course.Databases: 480,
     Course.DSA: 400,
-    Course.Spring: 550,
+    Course.Flask: 550,
 }
 
 
@@ -82,10 +82,10 @@ class Student:
 
     def __init__(self, first_name, last_name, email):
         self.courses = {
-            Course.Java: 0,
+            Course.Python: 0,
             Course.Databases: 0,
             Course.DSA: 0,
-            Course.Spring: 0,
+            Course.Flask: 0,
         }
 
         global id_sequence_generator
@@ -97,10 +97,10 @@ class Student:
 
     def get_student_points(self):
         return response_students_points_template.format(self.id,
-                                                        Course.Java.name, self.courses[Course.Java],
+                                                        Course.Python.name, self.courses[Course.Python],
                                                         Course.DSA.name, self.courses[Course.DSA],
                                                         Course.Databases.name, self.courses[Course.Databases],
-                                                        Course.Spring.name, self.courses[Course.Spring])
+                                                        Course.Flask.name, self.courses[Course.Flask])
 
     def get_course_stat(self, course):
         return CourseStatistic(self.id, self.courses[course], course)
@@ -116,10 +116,10 @@ class Student:
         return self.email.__hash__()
 
     def update_points(self, points: list):
-        self.courses[Course.Java] = self.courses[Course.Java] + points[0]
+        self.courses[Course.Python] = self.courses[Course.Python] + points[0]
         self.courses[Course.DSA] = self.courses[Course.DSA] + points[1]
         self.courses[Course.Databases] = self.courses[Course.Databases] + points[2]
-        self.courses[Course.Spring] = self.courses[Course.Spring] + points[3]
+        self.courses[Course.Flask] = self.courses[Course.Flask] + points[3]
 
     def __str__(self):
         return self.id
@@ -259,18 +259,18 @@ Hardest course: {}"""
             return report.format("n/a", "n/a", "n/a", "n/a", "n/a", "n/a")
         else:
             courses = []
-            list_java = self.get_course_stats_list("Java")
-            sum_points_java = sum([x.points for x in list_java])
-            courses.append({"name": Course["Java"], "value": sum_points_java})
+            list_python = self.get_course_stats_list("Python")
+            sum_points_python = sum([x.points for x in list_python])
+            courses.append({"name": Course["Python"], "value": sum_points_python})
             list_dsa = self.get_course_stats_list("DSA")
             sum_points_dsa = sum([x.points for x in list_dsa])
             courses.append({"name": Course["DSA"], "value": sum_points_dsa})
             list_databases = self.get_course_stats_list("Databases")
             sum_points_databases = sum([x.points for x in list_databases])
             courses.append({"name": Course["Databases"], "value": sum_points_databases})
-            list_spring = self.get_course_stats_list("Spring")
-            sum_points_spring = sum([x.points for x in list_spring])
-            courses.append({"name": Course["Spring"], "value": sum_points_spring})
+            list_flask = self.get_course_stats_list("Flask")
+            sum_points_flask = sum([x.points for x in list_flask])
+            courses.append({"name": Course["Flask"], "value": sum_points_flask})
             courses.sort(key=sort_func, reverse=True)
             return report.format(", ".join(x["name"].name for x in courses),
                                  "n/a",
