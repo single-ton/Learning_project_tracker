@@ -1,8 +1,8 @@
 type: edu
 files:
-- name: tests/tests.py
+- name: test/tests.py
   visible: false
-- name: tests/__init__.py
+- name: test/__init__.py
   visible: false
 - name: tests.py
   visible: false

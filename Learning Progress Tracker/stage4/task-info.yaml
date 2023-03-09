@@ -2,9 +2,9 @@ type: edu
 files:
 - name: tests.py
   visible: false
-- name: tests/__init__.py
+- name: test/__init__.py
   visible: false
 - name: task.py
   visible: true
-- name: tests/tests.py
+- name: test/tests.py
   visible: false
